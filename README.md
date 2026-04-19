@@ -9,6 +9,16 @@
 
 ---
 
+## Screenshots
+
+> Replace with actual screenshots — upload to `screenshots/` in the repo and update the paths below.
+
+| Label display | Input UI |
+|---|---|
+| ![Label display](https://placehold.co/480x270/0d1117/4d9375?text=Label+Display) | ![Input UI](https://placehold.co/480x270/0d1117/4d9375?text=Input+UI) |
+
+---
+
 ## Features
 
 - Label **any deployed entity** — storage boxes, electrical components, doors, workbenches, generators, and more
