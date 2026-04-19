@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("EntityLabel", "GameZone", "1.0.0")]
-    [Description("Beschriftet beliebige Deployed-Entities mit einem Label das beim Draufschauen erscheint.")]
+    [Info("Entity Label", "gamezoneone", "1.0.0")]
+    [Description("Label any deployed entity with custom text that appears when looking at it.")]
     public class EntityLabel : RustPlugin
     {
         #region Config
@@ -51,7 +51,7 @@ namespace Oxide.Plugins
             }
             catch
             {
-                PrintWarning("Config ungültig — Standard wird geladen.");
+                PrintWarning("Invalid config — loading defaults.");
                 LoadDefaultConfig();
             }
         }
@@ -68,12 +68,16 @@ namespace Oxide.Plugins
         {
             lang.RegisterMessages(new Dictionary<string, string>
             {
-                ["NoPermission"] = "Dafür fehlt die Berechtigung.",
-                ["NoEntity"]     = "Kein beschriftbares Objekt in Reichweite.",
-                ["NotAuthed"]    = "Nur TC-autorisierte Spieler können hier beschriften.",
-                ["TooLong"]      = "Text zu lang (max. {0} Zeichen).",
-                ["LabelSet"]     = "Label gesetzt.",
-                ["LabelRemoved"] = "Label entfernt.",
+                ["NoPermission"] = "You don't have permission to use this.",
+                ["NoEntity"]     = "No labelable object in range.",
+                ["NotAuthed"]    = "Only TC-authorized players can label here.",
+                ["TooLong"]      = "Text too long (max. {0} characters).",
+                ["LabelSet"]     = "Label set.",
+                ["LabelRemoved"] = "Label removed.",
+                ["UI.Title"]     = "Set Label",
+                ["UI.SaveHint"]  = "↵ Save",
+                ["UI.Delete"]    = "Delete",
+                ["UI.Cancel"]    = "Cancel",
             }, this);
         }
 
@@ -228,6 +232,7 @@ namespace Oxide.Plugins
 
         private void OpenInputUI(BasePlayer player, string existing)
         {
+            var uid = player.UserIDString;
             CuiHelper.DestroyUi(player, UI_INPUT);
             var container = new CuiElementContainer();
 
@@ -238,14 +243,12 @@ namespace Oxide.Plugins
                 CursorEnabled = true
             }, "Hud", UI_INPUT);
 
-            // Titel
             container.Add(new CuiLabel
             {
-                Text = { Text = "Label setzen", FontSize = 13, Align = TextAnchor.MiddleCenter, Color = "0.9 0.9 0.9 1" },
+                Text = { Text = T("UI.Title", uid), FontSize = 13, Align = TextAnchor.MiddleCenter, Color = "0.9 0.9 0.9 1" },
                 RectTransform = { AnchorMin = "0 0.78", AnchorMax = "1 1" }
             }, UI_INPUT);
 
-            // Eingabefeld
             container.Add(new CuiPanel
             {
                 Image = { Color = "0.18 0.18 0.18 1" },
@@ -273,27 +276,24 @@ namespace Oxide.Plugins
                 }
             });
 
-            // Hinweis
             container.Add(new CuiLabel
             {
-                Text = { Text = "↵ Speichern", FontSize = 10, Align = TextAnchor.MiddleRight, Color = "0.5 0.5 0.5 1" },
+                Text = { Text = T("UI.SaveHint", uid), FontSize = 10, Align = TextAnchor.MiddleRight, Color = "0.5 0.5 0.5 1" },
                 RectTransform = { AnchorMin = "0 0.30", AnchorMax = "0.97 0.46" }
             }, UI_INPUT);
 
-            // Löschen-Button
             container.Add(new CuiButton
             {
                 Button        = { Command = "entitylabel.delete", Color = "0.6 0.15 0.15 1" },
                 RectTransform = { AnchorMin = "0.04 0.04", AnchorMax = "0.49 0.28" },
-                Text          = { Text = "Löschen", FontSize = 12, Align = TextAnchor.MiddleCenter, Color = "1 1 1 1" }
+                Text          = { Text = T("UI.Delete", uid), FontSize = 12, Align = TextAnchor.MiddleCenter, Color = "1 1 1 1" }
             }, UI_INPUT);
 
-            // Abbrechen-Button
             container.Add(new CuiButton
             {
                 Button        = { Command = "entitylabel.cancel", Color = "0.25 0.25 0.25 1" },
                 RectTransform = { AnchorMin = "0.51 0.04", AnchorMax = "0.96 0.28" },
-                Text          = { Text = "Abbrechen", FontSize = 12, Align = TextAnchor.MiddleCenter, Color = "1 1 1 1" }
+                Text          = { Text = T("UI.Cancel", uid), FontSize = 12, Align = TextAnchor.MiddleCenter, Color = "1 1 1 1" }
             }, UI_INPUT);
 
             CuiHelper.AddUi(player, container);
