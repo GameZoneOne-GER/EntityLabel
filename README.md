@@ -11,8 +11,6 @@
 
 ## Screenshots
 
-> Replace with actual screenshots — upload to `screenshots/` in the repo and update the paths below.
-
 | Label display | Input UI |
 |---|---|
 | ![Label display](https://pic.gamezoneone.de/api/media/5tv3htqb.png) | ![Input UI](https://pic.gamezoneone.de/api/media/kn2ck0al.png) |
