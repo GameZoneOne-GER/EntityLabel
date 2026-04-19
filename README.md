@@ -15,7 +15,7 @@
 
 | Label display | Input UI |
 |---|---|
-| ![Label display](https://placehold.co/480x270/0d1117/4d9375?text=Label+Display) | ![Input UI](https://placehold.co/480x270/0d1117/4d9375?text=Input+UI) |
+| ![Label display](https://pic.gamezoneone.de/api/media/5tv3htqb.png) | ![Input UI](https://pic.gamezoneone.de/api/media/kn2ck0al.png) |
 
 ---
 
