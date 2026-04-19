@@ -45,7 +45,7 @@
 1. Stand in front of any deployed object (within `MaxDistance`)
 2. Type `/label` in chat
 3. Enter your label text → press **Enter** to save
-4. Use **Löschen / Delete** to remove an existing label
+4. Use **Delete** to remove an existing label
 
 ## Configuration
 
